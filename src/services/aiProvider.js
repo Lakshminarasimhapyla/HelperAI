@@ -5,9 +5,15 @@ export const AI_PROVIDER_KEY = "nova-ai-provider";
 export const OLLAMA_MODEL_KEY = "nova-ollama-model";
 export const OLLAMA_BASE_URL_KEY = "nova-ollama-url";
 
+function getDefaultProvider() {
+  const isLocalhost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+
+  return isLocalhost ? "ollama" : "mock";
+}
+
 export function getAiSettings() {
   return {
-    provider: localStorage.getItem(AI_PROVIDER_KEY) || "ollama",
+    provider: localStorage.getItem(AI_PROVIDER_KEY) || getDefaultProvider(),
     ollamaModel: localStorage.getItem(OLLAMA_MODEL_KEY) || import.meta.env.VITE_OLLAMA_MODEL || "llama3.2",
     ollamaBaseUrl: localStorage.getItem(OLLAMA_BASE_URL_KEY) || "http://localhost:11434"
   };
