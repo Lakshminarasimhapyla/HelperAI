@@ -1,5 +1,6 @@
 import { createMockResponse } from "./mockAi.js";
 import { createOllamaResponse } from "./ollama.js";
+import { createGroqResponse } from "./groq.js";
 
 export const AI_PROVIDER_KEY = "nova-ai-provider";
 export const OLLAMA_MODEL_KEY = "nova-ollama-model";
@@ -8,7 +9,7 @@ export const OLLAMA_BASE_URL_KEY = "nova-ollama-url";
 function getDefaultProvider() {
   const isLocalhost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
 
-  return isLocalhost ? "ollama" : "mock";
+  return isLocalhost ? "ollama" : "groq";
 }
 
 export function getAiSettings() {
@@ -30,6 +31,10 @@ export async function createAiResponse(prompt, regenerated = false, onToken) {
 
   if (settings.provider === "ollama") {
     return createOllamaResponse(prompt, settings, regenerated, onToken);
+  }
+
+  if (settings.provider === "groq") {
+    return createGroqResponse(prompt, regenerated);
   }
 
   return createMockResponse(prompt, regenerated);

@@ -11,6 +11,16 @@ npm run dev
 
 Open the local Vite URL shown in the terminal.
 
+## Groq on Vercel
+
+Add this environment variable in Vercel Project Settings before deploying:
+
+```text
+GROQ_API_KEY=your_groq_key_here
+```
+
+The browser app calls `/api/chat`; the serverless function keeps your key private.
+
 ## Build
 
 ```bash

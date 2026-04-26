@@ -53,13 +53,20 @@ export default function SettingsModal({ isOpen, onClose }) {
             <div className="mt-5 space-y-3">
               <div className="rounded-xl border border-cyan-400/20 bg-cyan-400/10 p-3">
                 <p className="font-semibold text-cyan-700 dark:text-cyan-200">AI provider</p>
-                <div className="mt-3 grid grid-cols-2 gap-2">
+                <div className="mt-3 grid grid-cols-3 gap-2">
                   <button
                     className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${settings.provider === "ollama" ? "bg-cyan-500 text-white" : "bg-white/70 text-slate-700 dark:bg-white/10 dark:text-slate-200"}`}
                     type="button"
                     onClick={() => updateSetting("provider", "ollama")}
                   >
                     Ollama
+                  </button>
+                  <button
+                    className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${settings.provider === "groq" ? "bg-cyan-500 text-white" : "bg-white/70 text-slate-700 dark:bg-white/10 dark:text-slate-200"}`}
+                    type="button"
+                    onClick={() => updateSetting("provider", "groq")}
+                  >
+                    Groq
                   </button>
                   <button
                     className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${settings.provider === "mock" ? "bg-cyan-500 text-white" : "bg-white/70 text-slate-700 dark:bg-white/10 dark:text-slate-200"}`}
@@ -96,7 +103,7 @@ export default function SettingsModal({ isOpen, onClose }) {
                   Toggle
                 </button>
               </SettingRow>
-              <SettingRow icon={KeyRound} title="API keys" text="Ollama runs locally. OpenAI, Hugging Face, and LangChain adapters can be added next." />
+              <SettingRow icon={KeyRound} title="API keys" text="Groq uses the GROQ_API_KEY environment variable on Vercel. Never place it in React code." />
               <SettingRow icon={Database} title="Memory" text="Local-only mock state today, provider memory later." />
               <SettingRow icon={Bell} title="Notifications" text="Badges and toast feedback are enabled." />
             </div>
